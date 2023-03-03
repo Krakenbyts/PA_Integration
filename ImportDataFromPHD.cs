@@ -65,33 +65,22 @@ namespace pa.integration.universal.adaptor
             #region Variable Declaration
 
             DataTable dataTable = null;
-            String pSourcePHDServer = String.Empty;
-            String pSourceDatabaseName = String.Empty;
-            String pSourceUseIntegratedSecurity = String.Empty;
-            String pSourcePHDUser = String.Empty;
-            String pSourcePHDPassword = String.Empty;
-            String pTagsMapperConnectionType = String.Empty;
-            String pTagsMapperDatabaseServerName = String.Empty;
-            String pTagsMapperDatabaseName = String.Empty;
-            String pTagsMapperUseIntegratedSecurity = String.Empty;
-            String pTagsMapperUserID = String.Empty;
-            String pTagsMapperPassword = String.Empty;
-            String pUseMSMQ = String.Empty;
-            String pSendKnownValues = String.Empty;
-            String pLogFile = String.Empty;
-            String url;
-            int pShiftDuration = 0;
-            int pDayDuration = 0;
-            int pAssayStartHour = 0;
-            int pShiftStartHour = 0;
-            int pDayStartHour = 0;
-            int pMonthStartHour = 0;
-            int pDelay = 0;
-            int pWaitPeriod = 0;
-            int pNumberDecimals = 0;
+            //Initialize String variable
+            //don't include var url in String.Empty
+            String pSourcePHDServer,pSourceDatabaseName,pSourceUseIntegratedSecurity,pSourcePHDUser,pSourcePHDPassword,pTagsMapperConnectionType,pTagsMapperDatabaseServerName;
+            String pTagsMapperDatabaseName,pTagsMapperUseIntegratedSecurity,pTagsMapperUserID,pTagsMapperPassword,pUseMSMQ,pSendKnownValues,pLogFile,connectionStringPHD,url;
+            //Initialize Int variable
+            int pShiftDuration,pDayDuration,pAssayStartHour,pShiftStartHour,pDayStartHour,pMonthStartHour,pDelay,pWaitPeriod,pNumberDecimals;
+
+            //Initialize String.Empty variable 
+            pSourcePHDServer = pSourceDatabaseName = pSourceUseIntegratedSecurity = pSourcePHDUser = pSourcePHDPassword = pTagsMapperConnectionType = pTagsMapperDatabaseServerName = String.Empty;
+            pTagsMapperDatabaseName=pTagsMapperUseIntegratedSecurity=pTagsMapperUserID=pTagsMapperPassword=pUseMSMQ=pSendKnownValues=pLogFile = connectionStringPHD = String.Empty;
+             
+            pShiftDuration = pDayDuration = pAssayStartHour = pShiftStartHour = pDayStartHour = pMonthStartHour = pDelay = pWaitPeriod = pNumberDecimals = 0;
+            
             SqlConnection sqlConnectionTagsMapper = null;
             SqlConnection sqlConnectionPHD = null;
-            string connectionStringPHD = String.Empty;
+            
             #endregion
 
             #region Parameters, Connections and Tags Mappings
