@@ -200,21 +200,11 @@ namespace pa.integration.universal.adaptor
 
                 // Get Web Service URL
                 url = mNameValueCollection["23 Web Service URL"];
-                if (string.IsNullOrEmpty(url) || url.Trim() == String.Empty)
-                {
-                    throw new ArgumentException("The parameter 'Web Service URL' must be indicated");
-                }
+                validate_check(url, "The parameter 'Web Service URL' must be indicated", 1);
 
                 // Get Number of Decimals
                 auxString = mNameValueCollection["24 Number of Decimals"];
-                if (string.IsNullOrEmpty(auxString) || auxString.Trim() == String.Empty)
-                {
-                    throw new ArgumentException("The parameter 'Number of Decimals' must be indicated");
-                }
-                if (!int.TryParse(auxString.Trim(), out pNumberDecimals))
-                {
-                    throw new ArgumentException("The parameter 'Number of Decimals' must be an integer");
-                }
+                MiscellCheck(auxString, pNumberDecimals, "The parameter 'Number of Decimals' must be");
                 if (pNumberDecimals < -1)
                 {
                     throw new ArgumentException("The parameter 'Number of Decimals' must be -1 (no rounding) or 0 (no decimals) or equal or greater than 1 (N decimals)");
@@ -850,18 +840,21 @@ namespace pa.integration.universal.adaptor
             return true;
 
         }
-        void validate_check(String FirstParamString,String text,int op)
-        {
+        //this method is for validate params in null or not initializer
+        static void validate_check(String FirstParamString,String text,int op)
+        {//this op variable is for select type validation
             switch (op)
             {
                 case == 1:
+                    //is null or Trim
                     if (string.IsNullOrEmpty(FirstParamString) || FirstParamString.Trim() == String.Empty)
-                    {
+                    {//show message exception of the text
                         throw new ArgumentException(text);
                     }
                     break;
 
                 case == 2:
+                    //compere if this param is upper and indiferent False 
                     if (FirstParamString.ToUpper().Trim() != "TRUE" && FirstParamString.ToUpper().Trim() != "FALSE")
                     {
                         throw new ArgumentException(text);
@@ -869,13 +862,15 @@ namespace pa.integration.universal.adaptor
                     break;
 
                 case == 3:
+                    //compare if is null and the param is false in upper
                     if ((string.IsNullOrEmpty(FirstParamString) || FirstParamString.Trim() == String.Empty) && FirstParamString.ToUpper().Trim() == "FALSE")
-                    {
+                    {//show text in Exception
                         throw new ArgumentException(text);
                     }
                     break;
 
                 case == 4:
+                    //check if is diferent whit TRUE in uppercase
                     if (FirstParamString.ToUpper().Trim() != "TRUE")
                     {
                         if (string.IsNullOrEmpty(FirstParamString) || FirstParamString.Trim() == String.Empty)
@@ -883,38 +878,36 @@ namespace pa.integration.universal.adaptor
                             throw new ArgumentException(text);
                         }
                     }
-                    break;
-
-                case double.NaN:
-                    Console.WriteLine("Failed measurement.");
-                    break;
+                    break;   
 
                 default:
-                    Console.WriteLine($"Measured value is {measurement}.");
+                    Console.WriteLine($"This Operator is not valid!!!");
                     break;
             }
             
         }
 
-        void Get_Tags_Mapper(String pTagsMapperUIntSec,String FirstParam,String excMss)
-        {
+        //this method is for compare pTagsMapper and First param for catch exception
+        static void Get_Tags_Mapper(String pTagsMapperUIntSec,String FirstParam,String excMss)
+        {//validate if indiferent to True
             if (pTagsMapperUIntSec.ToUpper().Trim() != "TRUE")
             {
                 if (string.IsNullOrEmpty(FirstParam) || FirstParam.Trim() == String.Empty)
-                {
+                {//show message 
                     throw new ArgumentException(excMss);
                 }
             }
         }
 
-        void MiscellCheck(String FirstParam,int SecondParam,String excMMS)
+        //this method is for compare if firstparam is null or empty
+        static void MiscellCheck(String FirstParam,int SecondParam,String excMMS)
         {
             if (string.IsNullOrEmpty(FirstParam) || FirstParam.Trim() == String.Empty)
-            {
+            {//show message
                 throw new ArgumentException(excMMS+" indicated");
             }
             if (!int.TryParse(FirstParam.Trim(), out SecondParam))
-            {
+            {//show message
                 throw new ArgumentException(excMMS+" an integer");
             }
         }
